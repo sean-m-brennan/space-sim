@@ -5,7 +5,7 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
 
 
-const paths = ['./src']
+const paths = ['./components', './planetarium', './util', './public']
 
 export default tseslint.config(
     { ignores: ['dist', 'attic'] },

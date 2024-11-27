@@ -1,17 +1,16 @@
 import { defineConfig } from 'tsup'
 import { glob } from 'glob'
 
-const sources = glob.sync('src/**/*.{ts,tsx}', {
-    ignore: ["src/**/*.d.ts"],
+const sources = glob.sync('./{components,planetarium,util}/*.{ts,tsx}', {
+    ignore: ["components/**/*.css", "./{components,planetarium,util}/*.d.ts"],
 })
 
 export default defineConfig({
     entry: sources,
     splitting: false,
+    tsconfig: './tsconfig.app.json',
     //sourcemap: true,
     clean: true,
-    //treeshake: true,
-    //dts: true,
     dts: {only: true},
     format: "esm"
 })

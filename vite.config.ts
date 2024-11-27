@@ -6,46 +6,53 @@ import glsl from 'vite-plugin-glsl'
 import { extname, relative } from 'path'
 import { fileURLToPath } from 'node:url'
 import { glob } from 'glob'
+import * as fs from "node:fs";
 
-const sources = glob.sync('src/**/*.{ts,tsx}', {
-    ignore: ["src/**/*.d.ts"],
+
+const sources = glob.sync('./{components,planetarium,util}/**/*.{ts,tsx,css}', {
+    ignore: ["./{components,planetarium,util}/**/*.d.ts"],
 })
+
+const plugins = [
+    react(),
+    glsl(),
+]
+// vite-plugin-eslint is incompatible with turbo
+if (process.env.TURBO_HASH === undefined && !fs.existsSync('.turbo')) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-argument
+    plugins.push(eslint())
+}
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    react(),
-    glsl(),
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-    eslint(),
-  ],
-  base: "/space-sim/",
-  build: {
-    lib: {
-      entry: sources,
-      formats: ["es"],
-    },
-    emptyOutDir: false,
-    rollupOptions: {
-        external: ['react', 'react/jsx-runtime'],
-        input: Object.fromEntries(
-            glob.sync('src/**/*.{ts,tsx}', {
-                ignore: ["src/**/*.d.ts"],
-            }).map(file => [
-                relative(
-                    'src',
-                    file.slice(0, file.length - extname(file).length)
-                ),
-                fileURLToPath(new URL(file, import.meta.url))
-            ])
-        ),
-        output: {
-            assetFileNames: (assetInfo) => {
-                //if (/\.css$/.test(assetInfo.names[0]))
-                    return "space-sim.[ext]"
-                //return assetInfo.names[0]
-            }
+    plugins: plugins,
+    base: "/space-sim/",
+    build: {
+        minify: false,
+        lib: {
+            entry: sources,
+            formats: ["es"],
+        },
+        cssCodeSplit: true,
+        emptyOutDir: false,
+        rollupOptions: {
+            external: [
+                'react', 'react/jsx-runtime',
+                'three', 'three-stdlib',
+                '@react-three/fiber', '@react-three/drei',
+                '@react-three/postprocessing'
+            ],
+            input: Object.fromEntries(
+                glob.sync('./{components,planetarium,util}/**/*.{ts,tsx,css}', {
+                    ignore: ["./{components,planetarium,util}/**/*.d.ts"],
+                }).map(file => [
+                    relative(
+                        '.',
+                        file.slice(0, file.length - extname(file).length)
+                    ),
+                    fileURLToPath(new URL(file, import.meta.url))
+                ])
+            ),
         },
     },
-  },
 })

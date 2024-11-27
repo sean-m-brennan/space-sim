@@ -22,7 +22,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
-    "composite": true,
     "baseUrl": ".",
     "paths": {
       "/*": ["./*"],
@@ -30,7 +29,11 @@
     "resolveJsonModule": true,
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
+    "components/**/*.tsx",
+    "components/**/*.ts",
+    "components/**/*.css",
+    "components/**/*.glsl",
+    "planetarium/**/*.ts",
+    "util/**/*.ts"
   ]
 }
