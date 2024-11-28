@@ -24,7 +24,8 @@
 
     "baseUrl": ".",
     "paths": {
-      "/*": ["./*"],
+      "locate-user/*": ["../locate-user/src/*"],
+      "space-data-api/*": ["../space-data-api/src/*"]
     },
     "resolveJsonModule": true,
   },

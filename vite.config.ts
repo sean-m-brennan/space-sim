@@ -7,10 +7,11 @@ import { extname, relative } from 'path'
 import { fileURLToPath } from 'node:url'
 import { glob } from 'glob'
 import * as fs from "node:fs";
+import path from "node:path";
 
 
 const sources = glob.sync('./{components,planetarium,util}/**/*.{ts,tsx,css}', {
-    ignore: ["./{components,planetarium,util}/**/*.d.ts"],
+    ignore: ["./{components,planetarium,util}/**/*.d.ts", "./public/**/*.{node,config}.js"],
 })
 
 const plugins = [
@@ -25,6 +26,12 @@ if (process.env.TURBO_HASH === undefined && !fs.existsSync('.turbo')) {
 
 // https://vitejs.dev/config/
 export default defineConfig({
+    resolve: {
+        alias: {
+            "locate-user/": path.resolve(__dirname, "../locate-user/src/"),
+            "space-data-api/": path.resolve(__dirname, "../space-data-api/src/"),
+        },
+    },
     plugins: plugins,
     base: "/space-sim/",
     build: {
@@ -44,7 +51,7 @@ export default defineConfig({
             ],
             input: Object.fromEntries(
                 glob.sync('./{components,planetarium,util}/**/*.{ts,tsx,css}', {
-                    ignore: ["./{components,planetarium,util}/**/*.d.ts"],
+                    ignore: ["./{components,planetarium,util}/**/*.d.ts", "./public/**/*.{node,config}.js"],
                 }).map(file => [
                     relative(
                         '.',
