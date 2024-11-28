@@ -48,14 +48,14 @@ import habitatLarge from "../public/images/habitat/photos_2015_12_8_fst_785695bf
 import habitatNormal from "../public/images/moon/ldem_3_8bit.jpg?url"  // FIXME
 import habitatNight from "../public/images/moon/darkside_2048.jpg?url"  // FIXME
 
-import asteroidIcon from "../public/images/icons/asteroid.png?url"
+//import asteroidIcon from "../public/images/icons/asteroid.png?url"
 import earthIcon from "../public/images/icons/earth.png?url"
 import jupiterIcon from "../public/images/icons/jupiter.png?url"
 import marsIcon from "../public/images/icons/mars.png?url"
 import mercuryIcon from "../public/images/icons/mercury.png?url"
 import moonIcon from "../public/images/icons/moon.png?url"
 import neptuneIcon from "../public/images/icons/neptune.png?url"
-import plutoIcon from "../public/images/icons/pluto.png?url"
+//import plutoIcon from "../public/images/icons/pluto.png?url"
 import saturnIcon from "../public/images/icons/saturn.png?url"
 import sunIcon from "../public/images/icons/sun.png?url"
 import uranusIcon from "../public/images/icons/uranus.png?url"
@@ -133,14 +133,14 @@ export const imageFiles = {
     ],
 
     icons: {
-        asteroid: asteroidIcon,
+        //asteroid: asteroidIcon,
         earth: earthIcon,
         jupiter: jupiterIcon,
         mars: marsIcon,
         mercury: mercuryIcon,
         moon: moonIcon,
         neptune: neptuneIcon,
-        pluto: plutoIcon,
+        //pluto: plutoIcon,
         saturn: saturnIcon,
         sun: sunIcon,
         uranus: uranusIcon,
