@@ -58,7 +58,7 @@ async function downloadImages(force=false){
             })());
         }
     }
-    await Promise.allSettled(p);
+    await Promise.allSettled(p)
 }
 
 const convertImages = (force=false) => {

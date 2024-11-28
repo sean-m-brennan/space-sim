@@ -24,12 +24,12 @@ import {
     Vector3
 } from "three"
 
-import {OrbitConsts} from "../../planetarium/orbital_data.ts"
-import {SpaceContext} from "./SpaceContext.tsx"
-import {PlanetMaterial, SurfaceParameters} from "../shaders/planet_material.tsx"
-import {AtmosphereParameters} from "../shaders/atmosphere_material.tsx"
-import {CloudParameters} from "../shaders/cloud_material.tsx"
-import {HazeParameters} from "../shaders/haze_material.tsx"
+import {OrbitConsts} from "../planetarium/orbital_data.ts"
+import {SpaceContext} from "./mechanics/SpaceContext.tsx"
+import {PlanetMaterial, SurfaceParameters} from "./shaders/planet_material.tsx"
+import {AtmosphereParameters} from "./shaders/atmosphere_material.tsx"
+import {CloudParameters} from "./shaders/cloud_material.tsx"
+import {HazeParameters} from "./shaders/haze_material.tsx"
 
 
 /*********************/

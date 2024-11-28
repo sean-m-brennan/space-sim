@@ -9,10 +9,10 @@ import Propagator, {defaultSpeed} from "./propagator"
 import {suggestedFov} from "../util/hypertext"
 
 import {SpaceDataConfig} from "space-data-api"
-import config from '../public/orrery_config.json?raw'
+//import config from '../public/orrery_config.json?raw'
 
 export const orreryDataConfig = import.meta.env.PROD
-    ? JSON.parse(config) as SpaceDataConfig
+    ? JSON.parse("/orrey_config.json") as SpaceDataConfig
     : {"host": "127.0.0.1", "port": 9988, "secure": false} as SpaceDataConfig
 
 export interface OrreryParams extends SpaceDataConfig {

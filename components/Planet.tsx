@@ -8,7 +8,7 @@ import {PlanetState} from "../planetarium/planet_impl.ts"
 import {Celestial} from "./Celestial"
 import {SpaceContext} from "./mechanics/SpaceContext.tsx"
 import {SatelliteProps} from './Satellite'
-import {OrbitalProps} from "./mechanics/Orbital.tsx"
+import {OrbitalProps} from "./Orbital.tsx"
 import {OrbitalType} from "../planetarium/orrery_state"
 import {bareSurface} from "./shaders/planet_material"
 import {euler2array, vector2array} from "../util/coordinates"

@@ -43,7 +43,7 @@ function Actions(props: ActionsProps) {
         })
         window.addEventListener('wheel', (event: WheelEvent) => {
             if (props.ptrCtrl.current.isLocked)
-                props.ptrCtrl.current.moveForward(event.deltaY / scale)
+                props.ptrCtrl.current.moveForward(-event.deltaY / scale)
         })
         const unsubscribeAny = subscribeKeys(() => {
             props.ptrCtrl.current.lock()

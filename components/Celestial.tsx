@@ -3,7 +3,7 @@ import {Mesh, SphereGeometry, Vector2} from "three"
 import {useFrame} from "@react-three/fiber"
 
 import {RandomOrbitConsts} from "../planetarium/orbital_data"
-import {OrbitalProps, OrbitalSurface} from "./mechanics/Orbital.tsx"
+import {OrbitalProps, OrbitalSurface} from "./Orbital.tsx"
 import {SpaceContext} from "./mechanics/SpaceContext.tsx"
 import {bareSurface} from "./shaders/planet_material"
 import {AtmosphereMaterial} from "./shaders/atmosphere_material"
