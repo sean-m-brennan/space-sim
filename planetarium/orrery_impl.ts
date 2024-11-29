@@ -24,12 +24,12 @@ export const setOrreryConfig = (cfg: SpaceDataConfig) => {
 }
 
 export const setOrreryConfigFromUrl = (cfgUrl: string) => {
-    fetch(cfgUrl).then(response => {
-        response.json().then(json => {
-            const cfg = json as SpaceDataConfig
-            globalThis.orrery_config = {host: cfg.host, port: cfg.port, secure: cfg.secure}
-        }).catch((err) => console.log(err))
-    }).catch((err) => console.log(err))
+    fetch(cfgUrl)
+        .then(response => response.json())
+        .then(json => {
+            globalThis.orrery_config = json as SpaceDataConfig
+        })
+        .catch((err) => console.log(err))
 }
 
 export const orreryDataConfig = globalThis.orrery_config

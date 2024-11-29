@@ -1,5 +1,5 @@
 import {RefObject} from "react"
-import {Color, IUniform, Mesh, Texture, TextureLoader, Vector3} from "three"
+import {Color, Mesh, Texture, TextureLoader, Vector3} from "three"
 import { v4 as uuid4 } from 'uuid'
 
 import "../util/extDate.ts"
@@ -12,8 +12,6 @@ import {SunState} from "./sun_impl.ts"
 
 /*********************/
 // Constants
-
-export type ShaderUniforms = {[p: string]: IUniform}  // FIXME
 
 declare const __brand: unique symbol
 type Branded<T, B> = T & { [__brand]: B }

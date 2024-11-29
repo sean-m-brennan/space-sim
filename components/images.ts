@@ -62,6 +62,8 @@ import uranusIcon from "../public/images/icons/uranus.png"
 import venusIcon from "../public/images/icons/venus.png"
 
 import hudMask from "../public/images/hud_mask.png"
+import splash from "../public/images/stars/orion.jpg"
+
 
 export const credits= [
   {url: "https://svs.gsfc.nasa.gov", label: "NASA Scientific Visualization Studio"},
@@ -148,4 +150,5 @@ export const imageFiles = {
     },
 
     hud: hudMask,
+    splash: splash,
 }

@@ -50,7 +50,7 @@ export function Orrery(props: OrreryProps) {
         const sd = new SpaceData(orreryDataConfig);
 
         (async() => {
-            const [lat, lon, alt] = getBrowserLocation("America/Denver")
+            const [lat, lon, alt] = getBrowserLocation("America/Denver")  // FIXME for debugging only
             const altitude = alt + earthConsts.radius
             console.debug(`Location at ${lat} lat, ${lon} lon, ${altitude} m`)
 

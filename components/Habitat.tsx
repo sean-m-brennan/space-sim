@@ -13,7 +13,7 @@ import {
 } from "three"
 
 import {OrbitalImages} from "../planetarium/orbital_data"
-import {SpaceContext} from "./mechanics/SpaceContext.tsx"
+import {SpaceContext} from "./mechanics/SpaceContext"
 import {imageFiles} from "./images"
 import {defaultInner, HabitatMaterial, InnerParameters} from "./shaders/habitat_material"
 
