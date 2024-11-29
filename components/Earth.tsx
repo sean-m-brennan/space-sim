@@ -85,7 +85,8 @@ export function Earth(props: EarthProps) {
         color: new Color(0xfffff88), //(0x9999cc),
         intensity: 2.5,
     }
-    const rotation = useRef(new Euler(0, 0, 0))
+    // map texture is misaligned by 67 degrees
+    const rotation = useRef(new Euler(0, -Math.PI*3.0/8.0, 0))
 
     return Planet({...props, orbit: new EarthConsts(),
         surfParams: surfParams, atmoParams: atmoParams, cloudParams: cloudParams,

@@ -5,7 +5,7 @@
 /.turbo/
 
 # whitelist
-!/components/global.d.ts
+!/global.d.ts
 !/components/**/*.module.css
 !/eslint.config.js
 !/tsup.config.ts
@@ -15,18 +15,22 @@
 # in-source generated files
 /*.d.ts
 /*.js
+/*.js.map
 /*.css
 /components/**/*.d.ts
 /components/**/*.js
+/components/**/*.js.map
 /components/**/*.css
 /images/
 /planetarium/**/*.d.ts
 /planetarium/**/*.js
+/planetarium/**/*.js.map
 /planetarium/**/*.css
 /util/**/*.d.ts
 /util/**/*.js
+/util/**/*.js.map
 /util/**/*.css
-orrery_config.json
+/orrery_config.json
 
 /public/images/**/*.tif
 /public/images/stars/Tycho*

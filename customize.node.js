@@ -6,7 +6,7 @@ import {relative} from "path"
 
 async function clean() {
     const generatedFiles = glob.sync(
-        './{.,components,planetarium,util}/**/*.{d.ts,js,css}',
+        './{.,components,planetarium,util}/**/*.{d.ts,js,css,js.map}',
         { ignore: [
                 "./{.,components,planetarium,util}/**/global.d.ts",
                 "./{.,components,planetarium,util}/**/*.module.css",

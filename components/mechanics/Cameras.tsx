@@ -10,7 +10,7 @@ export interface CamerasProps {
 }
 
 export function Cameras(props: CamerasProps) {
-    const camera = useRef(new PerspectiveCamera(90))
+    const camera = useRef(new PerspectiveCamera(60))
     //useHelper(camera, CameraHelper)  // needs target
     useEffect(() => {
         camera.current.position.set(0, 0, 1)

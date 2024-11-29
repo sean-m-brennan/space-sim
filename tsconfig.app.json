@@ -5,7 +5,7 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
-    "types": ["vite/client"],
+    "types": ["vite/client", "node"],
     "declaration": true,
 
     /* Bundler mode */
@@ -27,7 +27,6 @@
       "locate-user/*": ["../locate-user/src/*"],
       "space-data-api/*": ["../space-data-api/src/*"]
     },
-    "resolveJsonModule": true,
   },
   "include": [
     "components/**/*.tsx",
@@ -35,6 +34,7 @@
     "components/**/*.css",
     "components/**/*.glsl",
     "planetarium/**/*.ts",
-    "util/**/*.ts"
+    "util/**/*.ts",
+    "./global.d.ts",
   ]
 }

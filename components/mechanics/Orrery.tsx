@@ -13,10 +13,12 @@ import {Sun} from "../Sun.tsx"
 import {SunProps} from "../SunImpl.tsx"
 import {SpaceContext} from "./SpaceContext.tsx"
 import {j2kToThreeJs} from "../../util/coordinates.ts"
+import {earthConsts} from "../../planetarium/constants.ts"
 
-//import {getBrowserLocation} from "locate-user"
+import {getBrowserLocation} from "locate-user"
 import {getApproximateBrowserLocation} from "locate-user"
 import {SpaceData} from "space-data-api"
+
 
 
 type GenericProps = SatelliteProps | PlanetProps | SunProps
@@ -45,17 +47,18 @@ export function Orrery(props: OrreryProps) {
         //if (!ready)
         //    return
 
-        //const [lat, lon, alt] = getBrowserLocation();  // FIXME
-        const [lat, lon, alt] = getApproximateBrowserLocation();
         const sd = new SpaceData(orreryDataConfig);
-        console.debug(`Location at ${lat} lat, ${lon} lon, ${alt} m`);
 
         (async() => {
+            const [lat, lon, alt] = getBrowserLocation("America/Denver")
+            const altitude = alt + earthConsts.radius
+            console.debug(`Location at ${lat} lat, ${lon} lon, ${altitude} m`)
+
             if (await sd.check() === null) {
                 console.error("Unable to convert coordinates")
                 return
             }
-            const coords = await sd.fixedToJ2000(propagator.state.consts.start, lat, lon, alt)
+            const coords = await sd.fixedToJ2000(propagator.state.consts.start, lat, lon, altitude)
             const cart = j2kToThreeJs(coords.x, coords.y, coords.z, propagator.state.consts.scale)
             camera.position.set(cart.x, cart.y, cart.z)
             console.log(`Coords at ${cart.x}, ${cart.y}, ${cart.z}`)  // FIXME

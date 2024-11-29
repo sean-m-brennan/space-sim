@@ -9,11 +9,32 @@ import Propagator, {defaultSpeed} from "./propagator"
 import {suggestedFov} from "../util/hypertext"
 
 import {SpaceDataConfig} from "space-data-api"
-//import config from '../public/orrery_config.json?raw'
 
-export const orreryDataConfig = import.meta.env.PROD
-    ? JSON.parse("/orrey_config.json") as SpaceDataConfig
-    : {"host": "127.0.0.1", "port": 9988, "secure": false} as SpaceDataConfig
+/*********************/
+// so that projects using this lib can set the orrery api config, must be global
+
+declare global {
+    var orrery_config: SpaceDataConfig  // eslint-disable-line no-var
+}
+
+globalThis.orrery_config = {host: "127.0.0.1", port: 9988, secure: false}
+
+export const setOrreryConfig = (cfg: SpaceDataConfig) => {
+    globalThis.orrery_config = {host: cfg.host, port: cfg.port, secure: cfg.secure}
+}
+
+export const setOrreryConfigFromUrl = (cfgUrl: string) => {
+    fetch(cfgUrl).then(response => {
+        response.json().then(json => {
+            const cfg = json as SpaceDataConfig
+            globalThis.orrery_config = {host: cfg.host, port: cfg.port, secure: cfg.secure}
+        }).catch((err) => console.log(err))
+    }).catch((err) => console.log(err))
+}
+
+export const orreryDataConfig = globalThis.orrery_config
+
+/*********************/
 
 export interface OrreryParams extends SpaceDataConfig {
     startAt: Date
@@ -224,8 +245,8 @@ class OrreryConnect implements OrreryService {
     initialized: boolean
 
     constructor(params: OrreryParams = defaultOrreryParams) {
-        if (!crossOriginIsolated)
-            console.error("Site is not cross-origin isolated. Cannot use shared memory.")
+        //if (!crossOriginIsolated)
+        //    console.error("Site is not cross-origin isolated. Cannot use shared memory.")
         this.state = initialOrreryState(params)
         this.idents = {}
         this.initialized = false

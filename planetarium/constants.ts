@@ -33,6 +33,8 @@ export class EarthConsts extends OrbitConsts {
     }
 }
 
+export const earthConsts = new EarthConsts()
+
 export class MoonConsts extends OrbitConsts {
     radius = 1737.10  // km
     siderealDay = 10667.422902652  // seconds

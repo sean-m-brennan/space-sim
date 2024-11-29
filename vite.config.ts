@@ -3,20 +3,24 @@ import react from '@vitejs/plugin-react-swc'
 // @ts-expect-error 'types could not be resolved when respecting package.json "exports"'
 import eslint from 'vite-plugin-eslint'
 import glsl from 'vite-plugin-glsl'
+import libAssetsPlugin from '@laynezh/vite-plugin-lib-assets'
 import { extname, relative } from 'path'
 import { fileURLToPath } from 'node:url'
 import { glob } from 'glob'
-import * as fs from "node:fs";
-import path from "node:path";
+import * as fs from "node:fs"
+import path from "node:path"
 
 
 const sources = glob.sync('./{components,planetarium,util}/**/*.{ts,tsx,css}', {
-    ignore: ["./{components,planetarium,util}/**/*.d.ts", "./public/**/*.{node,config}.js"],
+    ignore: ["./{components,planetarium,util}/**/*.d.ts", "./public/**/*"],
 })
 
 const plugins = [
     react(),
     glsl(),
+    libAssetsPlugin({
+        outputPath: 'images',
+    }),
 ]
 // vite-plugin-eslint is incompatible with turbo
 if (process.env.TURBO_HASH === undefined && !fs.existsSync('.turbo')) {
@@ -35,10 +39,11 @@ export default defineConfig({
     plugins: plugins,
     base: "/space-sim/",
     build: {
+        sourcemap: true,
         minify: false,
         lib: {
             entry: sources,
-            formats: ["es"],
+            formats: ["es"],  // *not* cjs
         },
         cssCodeSplit: true,
         emptyOutDir: false,
@@ -47,11 +52,15 @@ export default defineConfig({
                 'react', 'react/jsx-runtime',
                 'three', 'three-stdlib',
                 '@react-three/fiber', '@react-three/drei',
-                '@react-three/postprocessing'
+                '@react-three/postprocessing',
+                'primereact', 'primeicons',
             ],
             input: Object.fromEntries(
                 glob.sync('./{components,planetarium,util}/**/*.{ts,tsx,css}', {
-                    ignore: ["./{components,planetarium,util}/**/*.d.ts", "./public/**/*.{node,config}.js"],
+                    ignore: [
+                        "./{components,planetarium,util}/**/*.d.ts",
+                        "./public/**/*"
+                    ],
                 }).map(file => [
                     relative(
                         '.',
