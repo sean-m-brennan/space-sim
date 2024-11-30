@@ -12,7 +12,8 @@ async function clean() {
                 "./{.,components,planetarium,util}/**/*.module.css",
                 "./{.,components,planetarium,util}/**/*.node.js",
                 "./{.,components,planetarium,util}/**/*.config.{js,ts}",
-                "./node_modules/**/*"
+                "./node_modules/**/*",
+                "./dist/**/*"
             ], }
     )
 
@@ -20,8 +21,6 @@ async function clean() {
     for (const file of generatedFiles) {
         p.push(unlink(file))
     }
-    p.push(unlink("./orrery_config.json"))
-    p.push(rm("./dist", { recursive: true, force: true }))
     p.push(rm("./images", { recursive: true, force: true }))
     await Promise.allSettled(p)
 }
@@ -41,6 +40,6 @@ async function copy() {
 if (process.argv.includes("--clean")) {
     clean().catch((err) => { console.error(err) })
 }
-else if (process.argv.includes("--postbuild")) {
+else if (process.argv.includes("--copy")) {
     copy().catch((err) => { console.error(err) })
 }

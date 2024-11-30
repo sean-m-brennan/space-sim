@@ -100,23 +100,27 @@ export function clamp(num: number, min: number, max: number) {
 }
 
 // from https://gist.github.com/EDais/1ba1be0fe04eca66bbd588a6c9cbd666
-export function	tempToColor(tempK: number): number {  // 2000K to 45000K
+export function	tempToColorHex(tempK: number): number {  // 2000K to 45000K
     tempK = clamp(tempK, 2000, 45000) / 100
 
     const rgb = {
         r: tempK <= 66 ?
             255 :
-            clamp(329.698727446 * (Math.pow(tempK - 60, -0.1332047592)), 0, 255),
+            Math.floor(clamp(329.698727446 * (Math.pow(tempK - 60, -0.1332047592)), 0, 255)),
         g: tempK <= 66 ?
-            clamp(99.4708025861 * Math.log(tempK) - 161.1195681661, 0, 255) :
-            clamp(288.1221695283 * (Math.pow(tempK - 60, -0.0755148492)), 0, 255),
+            Math.floor(clamp(99.4708025861 * Math.log(tempK) - 161.1195681661, 0, 255)) :
+            Math.floor(clamp(288.1221695283 * (Math.pow(tempK - 60, -0.0755148492)), 0, 255)),
         b: tempK >= 66 ?
             255 :
             (tempK <= 19 ?
                 0 :
-                clamp(138.5177312231 * Math.log(tempK - 10) - 305.0447927307, 0, 255))
+                Math.floor(clamp(138.5177312231 * Math.log(tempK - 10) - 305.0447927307, 0, 255)))
     }
     return (rgb.r << 16) + (rgb.g << 8) + rgb.b
+}
+
+export function tempToColor(tempK: number): Color {
+    return new Color().setHex(tempToColorHex(tempK))
 }
 
 export function getGoldenRatioColor(s: number = 0.99, v: number = 0.99): [number, number, number] {

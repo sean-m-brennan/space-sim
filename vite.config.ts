@@ -32,8 +32,9 @@ if (process.env.TURBO_HASH === undefined && !fs.existsSync('.turbo')) {
 export default defineConfig({
     resolve: {
         alias: {
-            "locate-user/": path.resolve(__dirname, "../locate-user/src/"),
-            "space-data-api/": path.resolve(__dirname, "../space-data-api/src/"),
+            "locate-user/": path.resolve(__dirname, "../locate-user/lib/"),
+            "space-data-api/": path.resolve(__dirname, "../space-data-api/"),
+            "lens-flare/": path.resolve(__dirname, "../lens-flare/lib/"),
         },
     },
     plugins: plugins,

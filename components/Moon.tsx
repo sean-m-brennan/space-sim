@@ -46,7 +46,7 @@ export function Moon(props: MoonProps) {
         emissiveIntensity: 0.8,  // stronger intensity from no atmosphere
     } as SurfaceParameters
     const surfaceMeshRef = useRef<Mesh>(null)
-    const positionRef = useRef<Vector3>(new Vector3(4,0,4))
+    const positionRef = useRef<Vector3>(new Vector3(3,0,3))
 
     useFrame(() => {
         if (!access.system.flux.paused) {

@@ -13,7 +13,7 @@ export interface HudProps {
 
 export function Hud(props: HudProps) {
     return (
-        <Html occlude> {/* occlude transform distanceFactor  position */}
+        <Html occlude  userData={{ lensflare: "no-occlusion" }}> {/* occlude transform distanceFactor  position */}
             <Sidebar visible fullScreen
                      onHide={()=>{}}
                      showCloseIcon={false}>

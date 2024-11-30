@@ -38,6 +38,7 @@ export interface AtmosphereParameters {
 	power?: number
 	color?: Color
     opacity?: number
+    transmission?: number
     diffusion?: Vector3
     lightDirections: Vector3[]  // normalized
 }
@@ -50,6 +51,7 @@ export const defaultAtmosphere = (system?: OrreryState): AtmosphereParameters =>
         power: 6.0,
         color: new Color(0xffffff),
         opacity: 0.7,
+        transmission: 0.5,
         diffusion: new Vector3(0.222, 0.222, 0.0),
         lightDirections: getLightDirections(system)
     }
@@ -74,6 +76,7 @@ export class AtmosphereMaterial extends ShaderMaterial implements OrbitalMateria
             matParams.uniforms.atmoPower = {value: params.power}
             matParams.uniforms.atmoColor = {value: params.color}
             matParams.uniforms.atmoOpacity = {value: params.opacity}
+            matParams.uniforms._transmission = {value: params.transmission}
             matParams.uniforms.atmoDiffusion = {value: params.diffusion}
             matParams.uniforms.atmoLights = {value: params.lightDirections.length}
             if (params.lightDirections.length > 0) {

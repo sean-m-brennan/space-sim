@@ -152,9 +152,9 @@ export function Orrery(props: OrreryProps) {
     console.log(props.children)
     return (
         <SpaceContext.Provider value={{ system, addSun, addPlanet, addSatellite }}>
-            {stars}
-            {suns}
             {orbitals}
+            {suns}
+            {stars}
         </SpaceContext.Provider>
     )
 }

@@ -1,6 +1,8 @@
 import starsLarge from "../public/images/stars/TychoSkymapII.t5_16384x08192.jpg"
 import starsSmall from "../public/images/stars/TychoSkymapII.t4_04096x02048.jpg"
 
+import sun from "../public/images/stars/2k_sun.jpg"
+
 import moonLarge from "../public/images/moon/lroc_color_poles_4k.jpg"
 import moonSmall from "../public/images/moon/lroc_color_poles_1k.jpg"
 import moonNormal from "../public/images/moon/ldem_3_8bit.jpg"
@@ -75,6 +77,7 @@ export const imageFiles = {
     stars: {
         large: starsLarge,
         small: starsSmall,
+        sun: sun,
     },
 
     earth: {

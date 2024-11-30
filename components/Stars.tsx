@@ -60,8 +60,9 @@ export default function Stars(props: StarsProps = initialProps) {
     return (
         <>
             {/* @ts-expect-error 'Ref == MutableRef' */}
-            <mesh ref={meshRef}>
-                <primitive object={sphere} attach="geometry"/>
+            <mesh ref={meshRef} userData={{ lensflare: "no-occlusion" }} >
+                <primitive object={sphere} attach="geometry"
+                           castShadow={false} receiveShadow={false}/>
                 <meshBasicMaterial map={texture} side={BackSide}/>
             </mesh>
             <ambientLight intensity={0.02}/> {/* starshine */}

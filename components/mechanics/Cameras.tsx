@@ -1,7 +1,7 @@
-import {useEffect, useRef} from "react"
+import {useEffect, useRef} from "react";
 import {CameraHelper, Curve, Line, Object3D, PerspectiveCamera, Vector3} from "three"
 import {useHelper} from "@react-three/drei/native"
-import {useFrame} from "@react-three/fiber";
+import {useFrame} from "@react-three/fiber"
 
 export interface CamerasProps {
     target?: Object3D

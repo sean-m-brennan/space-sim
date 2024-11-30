@@ -70,6 +70,7 @@ export function Earth(props: EarthProps) {
         coefficient: 1.8,
         power: 0.8,
         opacity: 0.4,
+        transmission: 0.80,
     }
     const cloudParams: CloudParameters = {
         ...defaultClouds,

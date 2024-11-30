@@ -1,6 +1,6 @@
 import React, {RefObject} from "react";
 import {useFrame} from "@react-three/fiber"
-import {Clock, DirectionalLight, Group, Object3D, SphereGeometry, Vector3} from 'three'
+import {Clock, Color, DirectionalLight, Group, Object3D, SphereGeometry, Vector3} from 'three'
 import {v4 as uuid4} from 'uuid'
 
 import '../util/extDate.ts'
@@ -20,7 +20,7 @@ export type SunProps = SunConstants
 export class SunImpl extends Object3D {
 	context: SystemAccessors
 	state: SunState
-	color: number
+	color: Color
 	size: number
 	intensity: number
 	scaling: number
@@ -30,7 +30,7 @@ export class SunImpl extends Object3D {
 	constructor(context: SystemAccessors, props: SunProps = randomSunConsts()) {
 		super()
 		this.context = context
-		const initialPosition = new Vector3(-5, 0, 3)  // FIXME wrong //new Vector(props.distance / access.system.consts.scale, 0, 0))
+		const initialPosition = new Vector3(5, 0, 5)  // FIXME wrong //new Vector(props.distance / access.system.consts.scale, 0, 0))
 		this.state = {
 			type: OrbitalType.SUN,
 			orbit: props,
@@ -42,7 +42,7 @@ export class SunImpl extends Object3D {
 		const rawDistance = props.distance / this.context.system.consts.scale
 		const originDistance = clamp(rawDistance, 2 * this.size, this.context.system.consts.maxDistance)
 		if (originDistance < rawDistance)
-			this.size = 0.0001
+			this.size = 0.1  // 0.001
 		this.intensity = 5.0 // FIXME
 		this.brightness = this.intensity
 		this.scaling = 1.0
@@ -76,25 +76,4 @@ export class SunImpl extends Object3D {
 		console.log(`Sun pos ${x}, ${y}, ${z}, scale ${newSize}`)
 		return true
 	}
-}
-
-interface SunFrameProps {
-	impl: SunImpl
-	whole: RefObject<Group>
-	geo: RefObject<SphereGeometry>
-	light: RefObject<DirectionalLight>
-}
-
-export const SunFrame = (props: SunFrameProps) => {
-	useFrame(({clock}) => {
-		if (props.impl.update(clock)) {
-			if (props.whole.current)
-				props.whole.current.position.set(...vector2array(props.impl.position))
-			if (props.geo.current)
-				props.geo.current.scale(props.impl.scaling, props.impl.scaling, props.impl.scaling)
-			if (props.light.current)
-				props.light.current.intensity = props.impl.brightness
-		}
-	})
-	return null
 }
