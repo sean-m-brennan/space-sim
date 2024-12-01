@@ -18,6 +18,7 @@ interface SunFrameProps {
     whole: RefObject<Group>
     geo: RefObject<SphereGeometry>
     light: RefObject<DirectionalLight>
+    animate: boolean
 }
 
 export const SunFrame = (props: SunFrameProps) => {
@@ -92,7 +93,7 @@ export const SunFrame = (props: SunFrameProps) => {
         opacity: 0.1,
         glareSize: 1.0,
         starPoints: 7,
-        animated: true,
+        animated: props.animate,
         position: props.impl.position,
         colorGain: props.impl.color.multiplyScalar(0.50),
         flareSpeed: 0.001,

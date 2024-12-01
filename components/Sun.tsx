@@ -41,7 +41,7 @@ export class Sun extends Component<PropsOptional<SunProps>, SunState> {
 				</mesh>
 				<directionalLight ref={light} color={impl.color} intensity={impl.brightness}
                                   castShadow={ctx.system.consts.shadows}/>
-				<SunFrame impl={impl} whole={whole} geo={geo} light={light}/>
+				<SunFrame impl={impl} whole={whole} geo={geo} light={light} animate/>
 			</group>
 		)
 	}
