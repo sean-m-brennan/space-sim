@@ -31,12 +31,13 @@ export class Sun extends Component<PropsOptional<SunProps>, SunState> {
 		// FIXME align with sunStates [getLightDirections()]
 		console.log(`Sun position == (${impl.position.x}, ${impl.position.y}, ${impl.position.z})`)
 
-
 		return (
 			<group ref={whole} position={impl.position}>
 				<mesh userData={{ lensflare: "no-occlusion" }}>
 					<sphereGeometry ref={geo} args={[impl.size, 32, 32]}/>
-					<meshBasicMaterial color={impl.color} map={sunSurface}/>
+					<meshStandardMaterial color={impl.color}
+										  emissive={impl.color} emissiveMap={sunSurface}
+										  emissiveIntensity={impl.brightness}/>
 				</mesh>
 				<directionalLight ref={light} color={impl.color} intensity={impl.brightness}
                                   castShadow={ctx.system.consts.shadows}/>

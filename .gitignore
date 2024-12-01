@@ -34,6 +34,7 @@
 
 /public/images/**/*.tif
 /public/images/stars/Tycho*
+/public/images/stars/*sun.*
 /public/images/moon/lroc*
 /public/images/moon/ldem*
 /public/images/earth/*.tif

@@ -62,6 +62,7 @@ export class SunImpl extends Object3D {
 		console.log(clock.elapsedTime)
 		clock.getElapsedTime()  // sets oldTime
 
+		//this.state.flux.rotation  // FIXME
 		// FIXME populate flux sunStates (ref?)
 		// FIXME change position via propagation
 		const doy = this.context.system.flux.currentTime.getFracDayOfYear()

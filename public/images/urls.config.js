@@ -1,7 +1,8 @@
 export const imageSources = {
   stars: {
     large: "https://svs.gsfc.nasa.gov/vis/a000000/a003500/a003572/TychoSkymapII.t5_16384x08192.jpg",
-    small: "https://svs.gsfc.nasa.gov/vis/a000000/a003500/a003572/TychoSkymapII.t4_04096x02048.jpg"
+    small: "https://svs.gsfc.nasa.gov/vis/a000000/a003500/a003572/TychoSkymapII.t4_04096x02048.jpg",
+    sun: "https://www.solarsystemscope.com/textures/download/2k_sun.jpg"
   },
 
   earth: {
