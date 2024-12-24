@@ -141,11 +141,28 @@ const convertImages = (force=false) => {
     })
 }
 
+const promiseWithTimeout = (promiseArg, timeoutMS) => {
+    let timer
+    const timeoutPromise = new Promise((resolve, reject) =>
+        (timer = setTimeout(() => reject(`Timed out after ${timeoutMS} ms.`),
+                timeoutMS)
+        )
+  ).finally(() => clearTimeout(timer))
+  return Promise.race([promiseArg, timeoutPromise])
+}
+
 const forceDownload = process.argv.includes("--force-download") || process.argv.includes("--force")
 const forceConvert = process.argv.includes("--force-conversion") || process.argv.includes("--force")
-downloadImages(forceDownload).then(() => {
-  convertImages(forceConvert)
-}).catch((e) => {
-  console.error(e)
-})
 
+const minutes = 4
+let complete = false
+while (!complete) {
+    await promiseWithTimeout(downloadImages(forceDownload), minutes * 60 * 1000)
+        .then(() => {
+            convertImages(forceConvert)
+            complete = true
+        })
+        .catch((err) => {
+            console.error(err)
+        })
+}
