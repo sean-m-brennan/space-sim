@@ -14,7 +14,7 @@
    limitations under the License.
 */
 
-import React, {RefObject, useContext, useEffect, useMemo, useState} from "react"
+import React, {RefObject, useContext, useMemo, useState} from "react"
 import {useFrame} from "@react-three/fiber"
 import {
     Euler,

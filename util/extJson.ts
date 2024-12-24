@@ -1,5 +1,10 @@
 import {Euler, Vector2, Vector3} from "three"
 
+// JSON must use 'any'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+
+
 type ObjArgs = any[]
 interface extJsonObj {
     $type: string
@@ -23,16 +28,12 @@ export const reviver = (_key: any, value: any): any => {
         const val = JSON.parse(value) as extJsonObj
         switch(val['$type']) {
             case 'Date':
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
                 return new Date(val.args[0])
             case 'Vector3':
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
                 return new Vector3(...val.args)
             case 'Vector2':
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
                 return new Vector2(...val.args)
             case 'Euler':
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
                 return new Euler(...val.args)
             default:
                 return value

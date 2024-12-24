@@ -1,4 +1,4 @@
-import React, {Children, ReactElement, ReactNode, useEffect, useMemo, useState} from "react"
+import React, {Children, ReactElement, useEffect, useMemo, useState} from "react"
 import {useThree} from "@react-three/fiber"
 import {Vector3} from "three"
 
@@ -9,7 +9,6 @@ import {SunState} from "../../planetarium/sun_impl.ts"
 import {SatelliteState} from "../../planetarium/satellite_impl.ts"
 import {SatelliteProps} from "../Satellite.tsx"
 import {PlanetProps} from "../Planet.tsx"
-import {Sun} from "../Sun.tsx"
 import {SunProps} from "../SunImpl.tsx"
 import {SpaceContext} from "./SpaceContext.tsx"
 import {j2kToThreeJs} from "../../util/coordinates.ts"
@@ -26,9 +25,11 @@ type GenericProps = SatelliteProps | PlanetProps | SunProps
 export interface OrreryProps {
     children: ReactElement<GenericProps>[]
     suns?: number
+    // eslint-disable-next-line
     cameras?: any //Cameras
     start?: Date
     duration?: number
+    askLocation?: boolean
 }
 
 export function Orrery(props: OrreryProps) {
@@ -40,6 +41,7 @@ export function Orrery(props: OrreryProps) {
 
     const [ready, setReady] = useState(false)
     //const [system, setSystem] = useState<OrreryState>(initialOrreryState(params))
+    // eslint-disable-next-line
     const [camPos, setCamPos] = useState<Vector3>(new Vector3(0, 0, 1))
     const propagator = useMemo(orreryDataServe, [])
 
@@ -50,7 +52,8 @@ export function Orrery(props: OrreryProps) {
         const sd = new SpaceData(orreryDataConfig);
 
         (async() => {
-            const [lat, lon, alt] = getBrowserLocation("America/Denver")  // FIXME for debugging only
+            // FIXME tz for debugging only
+            const [lat, lon, alt] = props.askLocation ? getBrowserLocation("America/Denver") : getApproximateBrowserLocation()
             const altitude = alt + earthConsts.radius
             console.debug(`Location at ${lat} lat, ${lon} lon, ${altitude} m`)
 
@@ -120,14 +123,6 @@ export function Orrery(props: OrreryProps) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [propagator.state.flux.initialized])
 
-    const [music] = useState(() => new Audio('something.mp3'))
-    const SoundTrack = () => {
-        music.currentTime = 0
-        music.volume = 0.2
-        music.play()
-            .catch((err) => {console.log(err)})
-    }
-
     //state.activeCamera = useThree().camera  // FIXME not working
     // FIXME use OrreryState camera
     //useThree.camera = system.flux.camera  // No
@@ -135,7 +130,7 @@ export function Orrery(props: OrreryProps) {
     const stars = Stars({size: propagator.state.consts.skymapSize})
 
     const suns: ReactElement<SunProps>[] = []
-    const orbitals: any[] = []
+    const orbitals: ReactElement<GenericProps>[] = []
     Children.forEach(props.children, (child: ReactElement<SunProps> | ReactElement<GenericProps>) => {
         if (typeof child.type !== 'string' && 'classname' in child.type &&
             child.type['classname'] === "Sun") {

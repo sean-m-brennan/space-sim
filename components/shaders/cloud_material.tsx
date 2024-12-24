@@ -29,8 +29,8 @@ import {
 } from "three"
 
 import {generateDataTexture} from "../../util/textures.ts"
-import {OrreryState} from "../../planetarium/orrery_impl.ts"
 import {OrbitalMaterial} from "../../planetarium/orbital_data.ts"
+import {OrreryState} from "../../planetarium/orrery_impl.ts";
 
 
 export interface CloudParameters {
@@ -161,9 +161,11 @@ export class CloudMaterial extends MeshLambertMaterial implements OrbitalMateria
         }
     }
 
-    update(delta: number, _state: OrreryState, _?: Vector3) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    update(delta: number, _state: OrreryState, _position?: Vector3) {
         const shader = this.userData.shader as WebGLProgramParametersWithUniforms
         if (this.enabled && shader && shader.uniforms) {  // FIXME confirm
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const offset = (delta * 0.005 * this.speed) / (2 * Math.PI)
             //shader.uniforms.uv_xOffset.value += offset % 1 // FIXME
         }

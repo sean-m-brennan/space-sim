@@ -17,18 +17,15 @@
 import {
     BackSide,
     Color,
-    DoubleSide,
     MeshStandardMaterial,
     MeshStandardMaterialParameters,
-    Vector2,
-    Vector3
+    Vector2
 } from "three"
 import {extend, MaterialNode} from '@react-three/fiber'
 
 import "../../util/extDate"
 import {loadTextures, OrbitalImages, OrbitalMaterial} from "../../planetarium/orbital_data"
-import {distance} from "../../util/elliptical"
-import {OrreryState} from "../../planetarium/orrery_impl.ts"
+//import {distance} from "../../util/elliptical"
 
 
 export interface InnerParameters {
@@ -149,7 +146,7 @@ export class HabitatMaterial extends MeshStandardMaterial implements OrbitalMate
         }
     }
 
-    update(_delta: number, _state: OrreryState, _position?: Vector3) {
+    update(/*delta: number, state: OrreryState, position: Vector3*/) {
         // FIXME rotation
     }
 }

@@ -14,7 +14,7 @@
    limitations under the License.
 */
 
-import React, {useContext, useEffect, useRef, useState} from "react"
+import React, {useContext, useRef} from "react"
 import {useFrame, useLoader, useThree} from "@react-three/fiber"
 import {
     BackSide,

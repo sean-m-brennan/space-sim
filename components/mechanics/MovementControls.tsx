@@ -1,8 +1,7 @@
-import React, {MutableRefObject, ReactNode, useEffect, useMemo, useRef, useState} from "react"
-import {Html, KeyboardControls, KeyboardControlsEntry, useKeyboardControls} from "@react-three/drei"
+import React, {MutableRefObject, ReactNode, useEffect, useMemo} from "react"
+import {KeyboardControls, KeyboardControlsEntry, useKeyboardControls} from "@react-three/drei"
 import {useFrame, useThree} from "@react-three/fiber"
 import {PointerLockControls} from 'three-stdlib'
-import {Sidebar} from "primereact/sidebar";
 
 enum ControlActions {
     forward = 'forward',

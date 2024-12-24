@@ -14,7 +14,7 @@
    limitations under the License.
 */
 
-import React, {useContext, useRef} from "react"
+import {useContext, useRef} from "react"
 import {Color, Euler, Vector2} from "three"
 import {extend} from "@react-three/fiber"
 

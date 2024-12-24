@@ -2,7 +2,9 @@ import React, {RefObject} from "react";
 import {useFrame} from "@react-three/fiber"
 import {EffectComposer} from "@react-three/postprocessing"
 import {DirectionalLight, Group, SphereGeometry} from "three"
-import {folder, useControls } from "leva"
+
+// uncomment for devel debugging
+//import {folder, useControls } from "leva"
 
 import {LensFlare} from "@andersonmancini/lens-flare"
 

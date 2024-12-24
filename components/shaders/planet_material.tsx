@@ -39,7 +39,7 @@ export interface SurfaceParameters {
 }
 
 export const bareSurface = (system?: OrreryState) => {
-    return {images:null, indexer:(_: Date): number => 0, normalScale:new Vector2(0.5,0.5),
+    return {images:null, indexer:(): number => 0, normalScale:new Vector2(0.5,0.5),
         roughness:1.0, metalness:0.0, emissiveColor:new Color(0x909090), emissiveIntensity:0.0, highRes:true,
         lightDirections:getLightDirections(system), hasAtmosphere: false} as SurfaceParameters
 }

@@ -93,7 +93,7 @@ export class AtmosphereMaterial extends ShaderMaterial implements OrbitalMateria
         this.enabled = params.enable
     }
 
-    update(_delta: number, _state: OrreryState, _position?: Vector3) {
+    update(/*_delta: number, _state: OrreryState, _position?: Vector3*/) {
         // nothing
         // FIXME update directions?
     }

@@ -20,11 +20,9 @@ import {
     Color,
     MeshLambertMaterial,
     MeshLambertMaterialParameters,
-    Vector3,
     WebGLProgramParametersWithUniforms
 } from "three"
 
-import {OrreryState} from "../../planetarium/orrery_impl.ts"
 import {OrbitalMaterial} from "../../planetarium/orbital_data.ts"
 
 
@@ -108,7 +106,7 @@ export class HazeMaterial extends MeshLambertMaterial implements OrbitalMaterial
         }
     }
 
-    update(_delta: number, _state: OrreryState, _?: Vector3) {
+    update() {
         // static, do nothing
     }
 }

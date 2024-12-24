@@ -1,4 +1,4 @@
-import React, {useContext, useMemo, useRef, useState} from "react"
+import {useContext, useMemo, useRef, useState} from "react"
 import {MeshPortalMaterial, PortalMaterialType, useCursor} from "@react-three/drei"
 import {useLocation, useRoute} from "wouter"
 import {

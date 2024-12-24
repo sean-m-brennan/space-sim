@@ -2,9 +2,9 @@ import {PerspectiveCamera, Vector3} from "three"
 
 import {replacer, reviver} from "../util/extJson"
 import {Coordinates, CoordSys} from "../util/coordinates"
-import {sunFluxSize, SunState} from "./sun_impl.ts"
-import {planetFluxSize, PlanetState} from "./planet_impl.ts"
-import {satelliteFluxSize, SatelliteState} from "./satellite_impl.ts"
+import {SunState} from "./sun_impl.ts"
+import {PlanetState} from "./planet_impl.ts"
+import {SatelliteState} from "./satellite_impl.ts"
 import Propagator, {defaultSpeed} from "./propagator"
 import {suggestedFov} from "../util/hypertext"
 
@@ -104,7 +104,7 @@ const numPlanets = 16
 const numSats = 255
 
 // 18526 bytes
-const mutablesByteSize = 38 + numSuns * sunFluxSize + numPlanets * planetFluxSize + numSats * satelliteFluxSize
+//const mutablesByteSize = 38 + numSuns * sunFluxSize + numPlanets * planetFluxSize + numSats * satelliteFluxSize
 
 export interface OrreryState {
     consts: OrreryConstants
@@ -181,6 +181,7 @@ let SEQUENCE = 0
 export const incrSeq = (): number => {
     try {
         SEQUENCE++
+        // eslint-disable-next-line
     } catch (e) {
         SEQUENCE = 0
     }

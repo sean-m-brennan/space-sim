@@ -64,7 +64,7 @@ import uranusIcon from "../public/images/icons/uranus.png"
 import venusIcon from "../public/images/icons/venus.png"
 
 import hudMask from "../public/images/hud_mask.png"
-import splash from "../public/images/stars/orion.jpg"
+import splash from "../public/images/stars/orion.jpg?url"
 
 
 export const credits= [

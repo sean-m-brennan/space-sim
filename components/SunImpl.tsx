@@ -1,6 +1,4 @@
-import React, {RefObject} from "react";
-import {useFrame} from "@react-three/fiber"
-import {Clock, Color, DirectionalLight, Group, Object3D, SphereGeometry, Vector3} from 'three'
+import {Clock, Color, Object3D, Vector3} from 'three'
 import {v4 as uuid4} from 'uuid'
 
 import '../util/extDate.ts'
