@@ -31,35 +31,30 @@ import {getLightDirections} from "../planetarium/orrery_impl.ts"
 import {imageFiles} from './images.ts'
 
 
-export interface EarthProps {
+export interface MarsProps {
     children?: PlanetChildren
 }
 
-export default function Earth(props: EarthProps) {
+export default function Mars(props: MarsProps) {
     const access = useContext(SpaceContext)
-    const imgSrc = imageFiles.earthAlt
+    const imgSrc = imageFiles.mars
     const images: OrbitalImages = {  // monthly
         daytime: {
-            low: imgSrc.small,
-            high: imgSrc.large,
+            low: [imgSrc.day.small],
+            high: [imgSrc.day.large],
         },
-        nighttime: imgSrc.night.large,
         elevation: imgSrc.normal,
-        clouds: imgSrc.clouds,
-        //clouds: mapClouds2,
-        specular: imgSrc.specular,
+        //clouds: imgSrc.clouds,
     }
     const surfParams: SurfaceParameters = {
-        indexer: (datetime: Date)=> {
-            return datetime.getMonth()  // 0 - 11
-        },
+        indexer: ()=> 0,  // FIXME seasonal diff?
         images: images,
         normalScale: new Vector2(0.5, 0.5),
         roughness: 1.0,
-        metalness: 0.5, // 0.05,
-        emissiveColor: new Color(0xfffffa),
-        emissiveIntensity: 0.6,
-        highRes: true,  // always (no low-res images)
+        metalness: 0.0,
+        emissiveColor: new Color('#000'),
+        emissiveIntensity: 0,
+        highRes: false,
         lightDirections: getLightDirections(access.system),
         hasAtmosphere: true,
     }
@@ -94,4 +89,4 @@ export default function Earth(props: EarthProps) {
         hazeParams: hazeParams, rotation: rotation.current})
 }
 
-extend({Earth})
+extend({Mars})

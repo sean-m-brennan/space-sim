@@ -17,7 +17,7 @@ declare global {
     var orrery_config: SpaceDataConfig  // eslint-disable-line no-var
 }
 
-globalThis.orrery_config = {host: "127.0.0.1", port: 9988, secure: false}
+globalThis.orrery_config = {host: "127.0.0.1", port: 8000, secure: false}
 
 export const setOrreryConfig = (cfg: SpaceDataConfig) => {
     globalThis.orrery_config = {host: cfg.host, port: cfg.port, secure: cfg.secure}
@@ -90,6 +90,7 @@ export interface OrreryFlux {
     ended: boolean
     currentTime: Date  // represent as timestamp
     speed: number
+    // FIXME camera position
     currentPlanet: number  // FIXME remove?
     stats: number
     // 64 bytes

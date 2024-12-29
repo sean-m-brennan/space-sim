@@ -120,9 +120,11 @@ export function sphericalToCartesian(theta: number, phi: number, rho: number): [
     return [x, y, z]
 }
 
-export function j2kToThreeJs(x: number, y: number, z: number, scale: number): Vector3 {
+export function j2kToThreeJs(x: number, y: number, z: number, units: string, scale: number): Vector3 {
     // J2k is Z-up, 3js is Y-up
+    console.log(units)
     const coords = new Vector3(x, z, y)
+    //const coords = new Vector3(-x, -y, -z)
     //coords.multiplyScalar(1.0/scale)
     coords.divideScalar(scale)
     return coords

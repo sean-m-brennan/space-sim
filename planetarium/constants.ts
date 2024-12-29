@@ -71,3 +71,5 @@ export const solConsts: SunConstants = {
 	temperature: 5800,
 	eclipticRef: (new EarthConsts()).eclipticRef
 }
+
+// FIXME everything else

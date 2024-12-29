@@ -20,7 +20,7 @@ import {SunState} from "./sun_impl.ts"
 import {PlanetState} from "./planet_impl.ts"
 import {SatelliteState} from "./satellite_impl.ts"
 
-import {SpaceData, vector} from "space-data-api"
+import SpaceData, {CartesianCoords} from "space-data-api"
 
 
 /********************
@@ -33,7 +33,7 @@ const minSpeed = 0.01  // tenth of a sec
 const maxSpeed = 3600.0  // one hr per sec
 export const defaultSpeed: number = 60.0
 
-const vector2vector3 = (v: vector): Vector3 => new Vector3(v.x, v.y, v.z)
+const vector2vector3 = (v: CartesianCoords): Vector3 => new Vector3(v.x, v.y, v.z)
 
 export default class Propagator implements OrreryService {
     readonly stepTime = 1000.0 / 60  // milliseconds per step/frame
@@ -56,7 +56,7 @@ export default class Propagator implements OrreryService {
     constructor(params: OrreryParams = defaultOrreryParams) {
         this.service = null
         if (params.host !== null)
-            this.service = new SpaceData(orreryDataConfig)
+            this.service = new SpaceData(orreryDataConfig, true)
         this.done = false
         this.started = false
         this.initialized = false

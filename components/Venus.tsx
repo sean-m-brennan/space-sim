@@ -20,7 +20,7 @@ import {extend} from "@react-three/fiber"
 
 import "../util/extDate.ts"
 import {OrbitalImages} from "../planetarium/orbital_data.ts"
-import {Planet, PlanetChildren} from "./Planet.tsx"
+import {Planet} from "./Planet.tsx"
 import {EarthConsts} from "../planetarium/constants.ts"
 import {SpaceContext} from "./mechanics/SpaceContext.tsx"
 import {SurfaceParameters} from "./shaders/planet_material.tsx"
@@ -31,11 +31,7 @@ import {getLightDirections} from "../planetarium/orrery_impl.ts"
 import {imageFiles} from './images.ts'
 
 
-export interface EarthProps {
-    children?: PlanetChildren
-}
-
-export default function Earth(props: EarthProps) {
+export default function Venus() {
     const access = useContext(SpaceContext)
     const imgSrc = imageFiles.earthAlt
     const images: OrbitalImages = {  // monthly
@@ -43,16 +39,11 @@ export default function Earth(props: EarthProps) {
             low: imgSrc.small,
             high: imgSrc.large,
         },
-        nighttime: imgSrc.night.large,
-        elevation: imgSrc.normal,
         clouds: imgSrc.clouds,
         //clouds: mapClouds2,
-        specular: imgSrc.specular,
     }
     const surfParams: SurfaceParameters = {
-        indexer: (datetime: Date)=> {
-            return datetime.getMonth()  // 0 - 11
-        },
+        indexer: ()=> 0,
         images: images,
         normalScale: new Vector2(0.5, 0.5),
         roughness: 1.0,
@@ -89,9 +80,9 @@ export default function Earth(props: EarthProps) {
     // map texture is misaligned by 67 degrees
     const rotation = useRef(new Euler(0, -Math.PI*3.0/8.0, 0))
 
-    return Planet({...props, orbit: new EarthConsts(),
+    return Planet({orbit: new EarthConsts(),
         surfParams: surfParams, atmoParams: atmoParams, cloudParams: cloudParams,
         hazeParams: hazeParams, rotation: rotation.current})
 }
 
-extend({Earth})
+extend({Venus})

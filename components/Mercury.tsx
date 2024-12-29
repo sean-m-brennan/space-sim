@@ -18,23 +18,18 @@ import {useContext, useRef} from "react"
 import {extend, useFrame,} from "@react-three/fiber"
 import {Color, Mesh, Vector2, Vector3} from "three"
 
-import {Satellite} from "./Satellite.tsx"
 import {OrbitalImages} from "../planetarium/orbital_data.ts"
 import {SpaceContext} from "./mechanics/SpaceContext.tsx"
 import {MoonConsts} from "../planetarium/constants.ts"
 import {bareSurface, SurfaceParameters} from "./shaders/planet_material.tsx"
 import {imageFiles} from './images.ts'
+import {Planet} from "./Planet.tsx"
 
 
-export interface MoonProps {
-    planetIdx?: number
-}
-
-export default function Moon(props: MoonProps) {
+export default function Mercury() {
     const access = useContext(SpaceContext)
     const images: OrbitalImages = {
         daytime: {low: [imageFiles.moon.small], high: [imageFiles.moon.large]},
-        nighttime: imageFiles.moon.night,
         //elevation: imageFiles.moon.normal,  // FIXME faulty
     }
     const surfParams = {
@@ -61,8 +56,8 @@ export default function Moon(props: MoonProps) {
     })
     const orbit = new MoonConsts()
     console.log(`Moon of size ${orbit.radius}`)
-    return Satellite({...props, orbit: orbit, position: positionRef.current,
-        surfParams: surfParams, surfaceMeshRef: surfaceMeshRef, rotationOverride: true})
+    return Planet({orbit: orbit, position: positionRef.current,
+        surfParams: surfParams})
 }
 
-extend({Moon})
+extend({Mercury})

@@ -14,57 +14,51 @@
    limitations under the License.
 */
 
-import React, {RefObject, useContext, useMemo, useState} from "react"
+import React, {RefObject, useContext, useState} from "react"
 import {useFrame} from "@react-three/fiber"
 import {
     Euler,
     Mesh,
-    SphereGeometry,
+    MeshStandardMaterial,
     Vector2,
     Vector3
 } from "three"
+import { GLTF } from "three-stdlib"
+import { useGLTF } from "@react-three/drei"
 
-import {OrbitConsts} from "../planetarium/orbital_data.ts"
 import {SpaceContext} from "./mechanics/SpaceContext.tsx"
 import {PlanetMaterial, SurfaceParameters} from "./shaders/planet_material.tsx"
-import {AtmosphereParameters} from "./shaders/atmosphere_material.tsx"
-import {CloudParameters} from "./shaders/cloud_material.tsx"
-import {HazeParameters} from "./shaders/haze_material.tsx"
 
 
-/*********************/
-// Base properties
-
-export interface OrbitalProps {
-    orbit?: OrbitConsts
-    surfParams?: SurfaceParameters
-    atmoParams?: AtmosphereParameters
-    cloudParams?: CloudParameters
-    hazeParams?: HazeParameters
-    position?: Vector3
-    rotation?: Euler
-    modelFile?: string
-    modelName?: string
-    textureFile?: string
-}
-
-/*********************/
-
-export interface OrbitalSurfaceProps {
+export interface OrbitalSurfaceModelProps {
     surface: SurfaceParameters
+    modelFile: string
+    modelName: string
+    textureFile: string
     surfaceSize: number
     segmentSize: Vector2
     surfaceRef: RefObject<Mesh>
     position?: Vector3
     rotation?: Euler
+    wrap?: boolean
 }
 
-export const OrbitalSurface = (props: OrbitalSurfaceProps) => {
+export const OrbitalSurfaceModel = (props: OrbitalSurfaceModelProps) => {
+    const model = Symbol(props.modelName)
+    const texture = Symbol(props.textureFile)
+    props.wrap = true  // FIXME remove
+
+    type GLTFResult = GLTF & {
+        nodes: {
+            [model]: Mesh
+        }
+        materials: {
+            [texture]: MeshStandardMaterial
+        }
+    }
+
     const access = useContext(SpaceContext)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const geometry = useMemo(() => new SphereGeometry(props.surfaceSize, props.segmentSize.x, props.segmentSize.y), [])
-    //// eslint-disable-next-line react-hooks/exhaustive-deps
-    //const material = useMemo(() => new PlanetMaterial(props.surface), [])
+    const { nodes, materials } = useGLTF(props.modelFile) as GLTFResult
     const [material] = useState(new PlanetMaterial(props.surface))
 
     useFrame((_, delta: number) => {
@@ -73,12 +67,15 @@ export const OrbitalSurface = (props: OrbitalSurfaceProps) => {
         // FIXME orbital rotation
     })
 
+    const mat = props.wrap == true ? material : materials[texture]
+
     return (
-        <>
+        <group {...props} dispose={null}>
             <mesh ref={props.surfaceRef}
-                  geometry={geometry} material={material}
                   castShadow={true} receiveShadow={true}
+                  geometry={nodes[model].geometry}
+                  material={mat}
                   position={props.position} rotation={props.rotation}/>
-        </>
+        </group>
     )
 }

@@ -9,6 +9,7 @@ import {bareSurface} from "./shaders/planet_material"
 import {AtmosphereMaterial} from "./shaders/atmosphere_material"
 import {CloudMaterial} from "./shaders/cloud_material"
 import {HazeMaterial} from "./shaders/haze_material"
+import {OrbitalSurfaceModel} from "./OrbitalModel.tsx";
 
 
 export interface CelestialProps extends OrbitalProps {
@@ -23,11 +24,19 @@ export function Celestial({orbit=new RandomOrbitConsts(), surfParams=bareSurface
     const surfaceSize = orbit.radius / access.system.consts.scale
     const segmentSize = new Vector2(32, 32)
 
-    const surfMesh = OrbitalSurface({
-        surface: surfParams, surfaceSize: surfaceSize,
-        segmentSize: segmentSize, surfaceRef: props.surfaceMeshRef,
-        position: props.position, rotation: props.rotation
-    })
+    const surfMesh = (props.modelFile && props.modelName && props.textureFile) ?
+        OrbitalSurfaceModel({
+            modelFile: props.modelFile, modelName: props.modelName,
+            textureFile: props.textureFile,
+            surface: surfParams, surfaceSize: surfaceSize,
+            segmentSize: segmentSize, surfaceRef: props.surfaceMeshRef,
+            position: props.position, rotation: props.rotation
+        }) :
+        OrbitalSurface({
+            surface: surfParams, surfaceSize: surfaceSize,
+            segmentSize: segmentSize, surfaceRef: props.surfaceMeshRef,
+            position: props.position, rotation: props.rotation
+        })
 
     const atmoGeometry = useMemo(() => {
         const atmosphereSize = surfaceSize + (orbit.atmosphereThickness / access.system.consts.scale)

@@ -16,7 +16,7 @@ import {earthConsts} from "../../planetarium/constants.ts"
 
 import {getBrowserLocation} from "locate-user"
 import {getApproximateBrowserLocation} from "locate-user"
-import {SpaceData} from "space-data-api"
+import SpaceData from "space-data-api"
 
 
 
@@ -61,8 +61,10 @@ export function Orrery(props: OrreryProps) {
                 console.error("Unable to convert coordinates")
                 return
             }
+            // FIXME deal with units/magnitude
             const coords = await sd.fixedToJ2000(propagator.state.consts.start, lat, lon, altitude)
-            const cart = j2kToThreeJs(coords.x, coords.y, coords.z, propagator.state.consts.scale)
+            console.log(coords)
+            const cart = j2kToThreeJs(coords.x, coords.y, coords.z, coords.units, propagator.state.consts.scale)
             camera.position.set(cart.x, cart.y, cart.z)
             console.log(`Coords at ${cart.x}, ${cart.y}, ${cart.z}`)  // FIXME
         })()

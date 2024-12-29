@@ -16,7 +16,8 @@
 
 import {useContext, useRef} from "react"
 import {extend, useFrame,} from "@react-three/fiber"
-import {Color, Mesh, Vector2, Vector3} from "three"
+import {Mesh, Vector3} from "three"
+import path from "path-browserify"
 
 import {Satellite} from "./Satellite.tsx"
 import {OrbitalImages} from "../planetarium/orbital_data.ts"
@@ -26,24 +27,19 @@ import {bareSurface, SurfaceParameters} from "./shaders/planet_material.tsx"
 import {imageFiles} from './images.ts'
 
 
-export interface MoonProps {
+export interface DeimosProps {
     planetIdx?: number
 }
 
-export default function Moon(props: MoonProps) {
+export default function Deimos(props: DeimosProps) {
     const access = useContext(SpaceContext)
     const images: OrbitalImages = {
-        daytime: {low: [imageFiles.moon.small], high: [imageFiles.moon.large]},
-        nighttime: imageFiles.moon.night,
-        //elevation: imageFiles.moon.normal,  // FIXME faulty
+        daytime: {low: [imageFiles.mars.deimos.day],},
     }
     const surfParams = {
         ...bareSurface(access.system),
         images: images,
         highRes: false,
-        normalScale: new Vector2(0.0001, 0.0001), // FIXME
-        emissiveColor: new Color(0xffffff),
-        emissiveIntensity: 0.8,  // stronger intensity from no atmosphere
     } as SurfaceParameters
     const surfaceMeshRef = useRef<Mesh>(null)
     const positionRef = useRef<Vector3>(new Vector3(3,0,3))
@@ -59,10 +55,11 @@ export default function Moon(props: MoonProps) {
                 surfaceMeshRef.current.rotation.y = Math.PI - Math.atan2(positionRef.current.z, positionRef.current.x)
         }
     })
-    const orbit = new MoonConsts()
-    console.log(`Moon of size ${orbit.radius}`)
+    const orbit = new MoonConsts() // FIXME
+    console.log(`Deimos of size ${orbit.radius}`)
     return Satellite({...props, orbit: orbit, position: positionRef.current,
+        modelFile: imageFiles.mars.deimos.model, modelName: "deimos", textureFile: path.basename(imageFiles.mars.deimos.day),
         surfParams: surfParams, surfaceMeshRef: surfaceMeshRef, rotationOverride: true})
 }
 
-extend({Moon})
+extend({Deimos})

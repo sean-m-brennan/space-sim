@@ -45,6 +45,16 @@ import earthSmallOct from "../public/images/earth/world.200410.3x2048x1024.jpg"
 import earthSmallNov from "../public/images/earth/world.200411.3x2048x1024.jpg"
 import earthSmallDec from "../public/images/earth/world.200412.3x2048x1024.jpg"
 
+import venus from "../public/images/venus/venus_clouds_texture_map_8k_by_askanery_dg6w9j7.jpg"
+
+import phobosModel from "../public/models/phobos.glb?url"
+import phobos from "../public/images/mars/mar1kuu2.jpg"
+import deimosModel from "../public/models/deimos.glb?url"
+import deimos from "../public/images/mars/mar2kuu2.jpg"
+import marsNormal from "../public/images/mars/mars_6k_normal.jpg"
+import marsDaySm from "../public/images/mars/mars_2k_color.jpg"
+import marsDay from "../public/images/mars/mars_12k_color.jpg"
+
 import habitatLarge from "../public/images/habitat/photos_2015_12_8_fst_785695bfe87-bef4-482a-8fd7-9543ccc63873.jpg"  // FIXME
 //import habitatLarge from "./habitat/photos_2017_11_10_fst_grass-lawn-texture.jpg"  // FIXME
 import habitatNormal from "../public/images/moon/ldem_3_8bit.jpg"  // FIXME
@@ -137,6 +147,28 @@ export const imageFiles = {
         }
     ],
 
+    venus: {
+        day: {
+            large: venus
+        }
+    },
+
+    mars: {
+        phobos: {
+            model: phobosModel,
+            day: phobos
+        },
+        deimos: {
+            model: deimosModel,
+            day: deimos
+        },
+        day: {
+            large: marsDay,
+            small: marsDaySm,
+        },
+        normal: marsNormal,
+    },
+
     icons: {
         //asteroid: asteroidIcon,
         earth: earthIcon,
@@ -145,7 +177,7 @@ export const imageFiles = {
         mercury: mercuryIcon,
         moon: moonIcon,
         neptune: neptuneIcon,
-        //pluto: plutoIcon,
+        //pluto: plutoIcon,  // too ugly
         saturn: saturnIcon,
         sun: sunIcon,
         uranus: uranusIcon,

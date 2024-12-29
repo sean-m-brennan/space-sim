@@ -17,7 +17,7 @@ export function Hud(props: HudProps) {
             <Sidebar visible fullScreen
                      onHide={()=>{}}
                      showCloseIcon={false}>
-                <img src={imageFiles.hud} alt="" className={css.hud_mask}/>
+                <img src={imageFiles.hud} alt="" className={css.mask}/>
                 <div className={css.hud}>
                     {props.children}
                 </div>

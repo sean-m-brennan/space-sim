@@ -41,5 +41,38 @@ export const imageSources = {
     large: "https://svs.gsfc.nasa.gov/vis/a000000/a004700/a004720/lroc_color_poles_4k.tif",
     small: "https://svs.gsfc.nasa.gov/vis/a000000/a004700/a004720/lroc_color_poles_1k.jpg",
     normal: "https://svs.gsfc.nasa.gov/vis/a000000/a004700/a004720/ldem_3_8bit.jpg"
+  },
+
+  mercury: {
+    large: "https://photojournal.jpl.nasa.gov/tiff/PIA12397.tif"
+  },
+
+  mars: {
+    phobos: "https://nasa3d.arc.nasa.gov/nasa/NASA-3D-Resources/Images%20and%20Textures/Phobos/mar1kuu2.tif",
+    deimos: "https://nasa3d.arc.nasa.gov/nasa/NASA-3D-Resources/Images%20and%20Textures/Deimos/mar2kuu2.tif",
+    small: "https://planetpixelemporium.com/download/download.php?5672/mars_2k_color.jpg",
+    large: "https://planetpixelemporium.com/download/download.php?5672/mars_12k_color.jpg",
+    normal: "https://planetpixelemporium.com/download/download.php?5672/mars_6k_normal.jpg"
+  },
+
+  jupiter: {
+    large: "https://nasa3d.arc.nasa.gov/nasa/NASA-3D-Resources/Images%20and%20Textures/Jupiter/jup0vss1.tif"
+  },
+
+  saturn: {
+    large: "https://nasa3d.arc.nasa.gov/nasa/NASA-3D-Resources/Images%20and%20Textures/Saturn/sat0fds1.tif"
+  },
+
+  uranus: {
+    large: "https://planetpixelemporium.com/download/download.php?uranusmap.jpg"
+  },
+
+  neptune: {
+    large: "https://nasa3d.arc.nasa.gov/nasa/NASA-3D-Resources/Images%20and%20Textures/Neptune/nep0fds1.tif"
+  },
+
+  pluto: {
+    charon: "https://photojournal.jpl.nasa.gov/tiff/PIA19866.tif",
+    large: "https://photojournal.jpl.nasa.gov/tiff/PIA11707.tif"
   }
 }
